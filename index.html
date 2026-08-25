@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>Annam Akhil | Software Engineer & Java Backend Developer</title>
+  <meta name="description"
+    content="Portfolio of Annam Akhil — Software Engineer specializing in Java, Spring Boot, PostgreSQL and scalable backend systems. Explore projects, experience and get in touch.">
+  <meta name="keywords" content="Annam Akhil, Java Developer, Backend Developer, Spring Boot, SQL, Portfolio">
+  <meta name="author" content="Annam Akhil">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Annam Akhil | Software Engineer">
+  <meta property="og:description" content="Java Backend Developer building scalable systems. DSA · Java · SQL.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/profile.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/profile.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- ===== Animated background orbs (decorative) ===== -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" aria-label="Home">
+        <span class="logo-accent">&lt;</span>akhil<span class="logo-accent">/&gt;</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Primary navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark / light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+            fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+            fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section id="home" class="hero-section section">
+      <div class="hero-container">
+        <div class="hero-content reveal">
+          <span class="badge glass">
+            <span class="pulse-dot"></span> Available for Opportunities
+          </span>
+
+          <h1 class="hero-name">Hi, I'm <span class="gradient-text">Annam Akhil</span></h1>
+          <p class="hero-role">
+            <span id="typing-text" aria-live="polite"></span><span class="cursor" aria-hidden="true">|</span>
+          </p>
+
+          <p class="hero-tagline">
+            I build scalable backend systems and clean, performant web experiences —
+            turning ideas into production-ready software.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#projects" class="btn btn-primary magnetic">
+              View Projects
+              <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2.5" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="Akhil_Annam_resumeM.pdf" download="Annam_Akhil_Resume.pdf" class="btn btn-outline magnetic">
+              <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              Resume
+            </a>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://github.com/Akhilannam12" target="_blank" rel="noopener noreferrer" class="social-icon"
+              aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z">
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/annam-akhil-1a7339238/" target="_blank" rel="noopener noreferrer"
+              class="social-icon" aria-label="LinkedIn Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z">
+              </svg>
+            </a>
+            <a href="mailto:akhilannam81@gmail.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-image reveal delay-2">
+          <div class="profile-frame">
+            <img src="assets/profile.png" alt="Portrait of Annam Akhil" class="profile-img" width="380" height="380">
+            <span class="frame-ring" aria-hidden="true"></span>
+          </div>
+          <div class="floating-chip chip-1 glass">☕ Java</div>
+          <div class="floating-chip chip-2 glass">🍃 Spring Boot</div>
+          <div class="floating-chip chip-3 glass">🐘 PostgreSQL</div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint" aria-label="Scroll to about section">
+        <span class="mouse"><span class="wheel"></span></span>
+      </a>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="about-section section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">// who am i</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-bio reveal">
+            <p>
+              I'm a <strong>Computer Science Engineering graduate</strong> with a strong foundation in backend
+              software engineering. My work centers on creating scalable backend ecosystems, high-performance
+              APIs, and structured database systems.
+            </p>
+            <p>
+              With expertise spanning the full Java lifecycle, I write clean, modular code with
+              <strong>Spring Boot</strong> and design reliable schemas on <strong>PostgreSQL</strong>. I love
+              solving algorithmic problems and continuously sharpening my CS fundamentals.
+            </p>
+
+            <div class="lang-block reveal">
+              <h4>Languages</h4>
+              <div class="lang-list">
+                <span class="chip">Telugu · Native</span>
+                <span class="chip">English · Professional</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="strength-cards reveal delay-2">
+            <article class="strength-card glass">
+              <span class="strength-icon">⚡</span>
+              <h3>DSA &amp; Problem Solving</h3>
+              <p>100+ problems solved across LeetCode &amp; HackerRank.</p>
+            </article>
+            <article class="strength-card glass">
+              <span class="strength-icon">🛠️</span>
+              <h3>Backend Engineering</h3>
+              <p>REST APIs, Spring Boot services &amp; query optimization.</p>
+            </article>
+            <article class="strength-card glass">
+              <span class="strength-icon">🗄️</span>
+              <h3>Databases</h3>
+              <p>Structured schemas &amp; performant queries in PostgreSQL / MySQL.</p>
+            </article>
+            <article class="strength-card glass">
+              <span class="strength-icon">🤝</span>
+              <h3>Agile Teamwork</h3>
+              <p>Sprints, code reviews &amp; clear technical communication.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="skills-section section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">// my toolbox</span>
+          <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card glass reveal">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <h3>Languages</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">Java</span>
+              <span class="skill-badge">SQL</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">C</span>
+            </div>
+          </article>
+
+          <article class="skill-card glass reveal delay-1">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+              <h3>Frameworks</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">Spring Boot</span>
+              <span class="skill-badge">Spring MVC</span>
+              <span class="skill-badge">HTML5</span>
+              <span class="skill-badge">CSS3</span>
+            </div>
+          </article>
+
+          <article class="skill-card glass reveal delay-2">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
+              </svg>
+              <h3>Databases</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">PostgreSQL</span>
+              <span class="skill-badge">MySQL</span>
+            </div>
+          </article>
+
+          <article class="skill-card glass reveal delay-3">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                </path>
+              </svg>
+              <h3>Core CS</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">DSA</span>
+              <span class="skill-badge">OOP</span>
+              <span class="skill-badge">DBMS</span>
+              <span class="skill-badge">Operating Systems</span>
+              <span class="skill-badge">Computer Networks</span>
+              <span class="skill-badge">System Design</span>
+            </div>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                </path>
+              </svg>
+              <h3>Tools</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">Git</span>
+              <span class="skill-badge">GitHub</span>
+              <span class="skill-badge">VS Code</span>
+              <span class="skill-badge">Eclipse</span>
+            </div>
+          </article>
+
+          <article class="skill-card glass reveal delay-1">
+            <div class="skill-card-head">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <h3>Currently Exploring</h3>
+            </div>
+            <div class="skill-badges">
+              <span class="skill-badge">Agentic AI</span>
+              <span class="skill-badge">React</span>
+              <span class="skill-badge">Node.js</span>
+              <span class="skill-badge">MongoDB</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="projects-section section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">// things i've built</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card glass reveal">
+            <div class="project-top">
+              <span class="folder-icon">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="1.6" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </span>
+              <div class="project-links">
+                <a href="https://github.com/Akhilannam12/SMART-GARAGE-APP--frontend" target="_blank"
+                  rel="noopener noreferrer" aria-label="Smart Garage GitHub repository" class="icon-link">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z">
+                  </svg>
+                </a>
+                <a href="https://github.com/Akhilannam12/SMART-GARAGE-APP--frontend" target="_blank"
+                  rel="noopener noreferrer" aria-label="Smart Garage live demo" class="icon-link">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Smart Garage</h3>
+            <p class="project-desc">
+              A robust vehicle service booking platform streamlining booking operations, customer data
+              administration, and backend system updates.
+            </p>
+            <div class="stack-tags">
+              <span>Flutter</span><span>Spring Boot</span><span>PostgreSQL</span>
+            </div>
+          </article>
+
+          <article class="project-card glass reveal delay-1">
+            <div class="project-top">
+              <span class="folder-icon">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="1.6" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </span>
+              <div class="project-links">
+                <a href="https://github.com/akhilannam/traffic-signal-bot" target="_blank" rel="noopener noreferrer"
+                  aria-label="Traffic Signal Detection Bot GitHub repository" class="icon-link">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z">
+                  </svg>
+                </a>
+                <a href="https://github.com/akhilannam/traffic-signal-bot" target="_blank" rel="noopener noreferrer"
+                  aria-label="Traffic Signal Detection Bot live demo" class="icon-link">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Traffic Signal Detection Bot</h3>
+            <p class="project-desc">
+              Automated traffic-status system using a custom-trained YOLOv8 computer vision model to detect signal
+              configurations, coordinated through a Telegram chatbot.
+            </p>
+            <div class="stack-tags">
+              <span>YOLOv8</span><span>Python</span><span>Telegram API</span>
+            </div>
+          </article>
+
+          <article class="project-card glass reveal delay-2">
+            <div class="project-top">
+              <span class="folder-icon">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="1.6" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </span>
+              <div class="project-links">
+                <a href="https://github.com/Akhilannam12" target="_blank" rel="noopener noreferrer"
+                  aria-label="More projects on GitHub" class="icon-link">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z">
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">REST API Services Library</h3>
+            <p class="project-desc">
+              A collection of Spring Boot REST microservices with request validation, layered architecture and
+              optimized PostgreSQL persistence layers.
+            </p>
+            <div class="stack-tags">
+              <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-more reveal">
+          <a href="https://github.com/Akhilannam12" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            More on GitHub
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="experience-section section">
+      <div class="container container-narrow">
+        <div class="section-head reveal">
+          <span class="section-kicker">// where i've worked</span>
+          <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3>Software Development Intern</h3>
+                  <span class="company">Softurecs AI Labs Pvt Ltd · Hyderabad, India</span>
+                </div>
+                <span class="timeline-date">Jan 2026 – Jul 2026</span>
+              </div>
+              <ul class="timeline-points">
+                <li>Developed and maintained scalable backend services using Java and Spring Boot.</li>
+                <li>Built RESTful APIs and integrated them with frontend applications for seamless data flow.</li>
+                <li>Worked on AI-driven solutions, including basic machine learning model integration and data
+                  processing.</li>
+                <li>Optimized database queries using SQL and improved application performance.</li>
+                <li>Collaborated with cross-functional teams using Git for version control and agile methodologies.</li>
+                <li>Assisted in deploying applications on cloud platforms and monitoring performance.</li>
+              </ul>
+              <div class="stack-tags">
+                <span>Java</span><span>Spring Boot</span><span>REST APIs</span><span>SQL</span><span>Git</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3>Java Full Stack Developer Intern</h3>
+                  <span class="company">Edu Skills Academy</span>
+                </div>
+                <span class="timeline-date">Apr 2025 – Jun 2025</span>
+              </div>
+              <ul class="timeline-points">
+                <li>Designed and built custom RESTful endpoints and request validation rules using Spring Boot.</li>
+                <li>Analyzed and optimized relational database queries, boosting lookup performance on PostgreSQL
+                  datasets.</li>
+                <li>Collaborated in Agile workflows — weekly sprints, code reviews, and sprint demos.</li>
+              </ul>
+              <div class="stack-tags">
+                <span>Spring Boot</span><span>PostgreSQL</span><span>Agile</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3>B.Tech Computer Science Engineering</h3>
+                  <span class="company">Narayana Engineering College</span>
+                </div>
+                <span class="timeline-date">2022 – 2026</span>
+              </div>
+              <ul class="timeline-points">
+                <li>CGPA: 8.2 / 10 with focus on backend development and data structures.</li>
+                <li>NMMS National Merit Scholarship qualifier.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact-section section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">// let's talk</span>
+          <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <h3>Let's build something together</h3>
+            <p>I'm currently open to full-time roles and internships. My inbox is always open — whether you have a
+              question or just want to say hi, I'll get back to you!</p>
+
+            <a href="mailto:akhilannam81@gmail.com" class="info-item">
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </span>
+              <span>
+                <span class="info-label">Email</span>
+                <span class="info-val">akhilannam81@gmail.com</span>
+              </span>
+            </a>
+
+            <a href="tel:+916300749254" class="info-item">
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                  </path>
+                </svg>
+              </span>
+              <span>
+                <span class="info-label">Phone / WhatsApp</span>
+                <span class="info-val">+91 63007 49254</span>
+              </span>
+            </a>
+
+            <div class="info-item">
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </span>
+              <span>
+                <span class="info-label">Location</span>
+                <span class="info-val">Nellore, Andhra Pradesh, India</span>
+              </span>
+            </div>
+
+            <div class="contact-socials">
+              <a href="https://github.com/Akhilannam12" target="_blank" rel="noopener noreferrer" class="social-icon"
+                aria-label="GitHub">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path
+                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z">
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/annam-akhil-1a7339238/" target="_blank" rel="noopener noreferrer"
+                class="social-icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path
+                    d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z">
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <form id="contact-form" class="contact-form glass reveal delay-2" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cf-name">Name</label>
+                <input type="text" id="cf-name" name="name" placeholder="John Doe" required minlength="2">
+              </div>
+              <div class="form-group">
+                <label for="cf-email">Email</label>
+                <input type="email" id="cf-email" name="email" placeholder="john@example.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cf-subject">Subject</label>
+              <input type="text" id="cf-subject" name="subject" placeholder="Opportunity / Collaboration">
+            </div>
+            <div class="form-group">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="5" placeholder="Hello Akhil, I'd love to connect about..."
+                required minlength="10"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Send Message
+              <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+            <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-container">
+      <a href="#home" class="nav-logo footer-logo">
+        <span class="logo-accent">&lt;</span>akhil<span class="logo-accent">/&gt;</span>
+      </a>
+
+      <nav class="footer-links" aria-label="Footer quick links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <p class="footer-copy">&copy; <span id="year">2026</span> Annam Akhil · Built with HTML, CSS &amp; vanilla JS</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top" class="scroll-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"
+      stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+</body>
+
+</html>
