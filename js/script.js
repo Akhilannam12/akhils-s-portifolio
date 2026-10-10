@@ -16,22 +16,26 @@
   /* ---------- 1. THEME TOGGLE ---------- */
   const root = document.documentElement;
   const themeToggle = document.getElementById('theme-toggle');
-  const storedTheme = localStorage.getItem('theme');
 
-  if (storedTheme) {
-    root.setAttribute('data-theme', storedTheme);
+  // Enforce dark mode as the default on every open / fresh load
+  root.setAttribute('data-theme', 'dark');
+  try {
+    localStorage.removeItem('theme');
+  } catch (e) {
+    // Restricted environment fallback
   }
 
-  themeToggle.addEventListener('click', () => {
-    const next =
-      root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    // Keep browser UI chrome in sync
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', next === 'dark' ? '#0a0e1a' : '#f6f7fb');
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      // Keep browser UI chrome in sync
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', next === 'dark' ? '#0a0e1a' : '#f6f7fb');
+    });
+  }
 
   /* ---------- 2. MOBILE MENU ---------- */
   const hamburger = document.getElementById('hamburger');
@@ -84,9 +88,10 @@
   const typingEl = document.getElementById('typing-text');
   const roles = [
     'Software Engineer',
-    'Java Backend Developer',
-    'Spring Boot Enthusiast',
-    'Problem Solver'
+    'Freelance Software Developer',
+    'Custom SaaS & CRM Builder',
+    'Mobile App Developer (Flutter)',
+    'Java Backend Architect'
   ];
 
   if (typingEl) {
@@ -145,8 +150,8 @@
     revealEls.forEach((el) => el.classList.add('visible'));
   }
 
-  /* ---------- 6. PROJECT CARD CURSOR GLOW ---------- */
-  document.querySelectorAll('.project-card').forEach((card) => {
+  /* ---------- 6. CARD CURSOR GLOW (PROJECTS & SERVICES) ---------- */
+  document.querySelectorAll('.project-card, .service-card, .redirect-card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--mx', e.clientX - rect.left + 'px');
@@ -154,7 +159,7 @@
     });
   });
 
-  /* ---------- 7. CONTACT FORM (UI ONLY) ---------- */
+  /* ---------- 7. CONTACT FORM (LEAD STORAGE + MAILTO) ---------- */
   const form = document.getElementById('contact-form');
   const note = document.getElementById('form-note');
 
@@ -164,12 +169,17 @@
 
       const name = form.name.value.trim();
       const email = form.email.value.trim();
+      const phone = form.phone ? form.phone.value.trim() : '';
+      const service = form.service ? form.service.value : 'Custom Software Project';
+      const userSubject = form.subject.value.trim();
       const message = form.message.value.trim();
+      const termsAccepted = form.terms ? form.terms.checked : true;
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const phoneValid = !phone || /^[\d\s\+\-\(\)]{7,20}$/.test(phone);
 
       note.classList.remove('success', 'error');
 
-      if (!name || !email || !message) {
+      if (!name || !email || !phone || !message) {
         showNote('Please fill in all required fields.', 'error');
         return;
       }
@@ -177,17 +187,54 @@
         showNote('Please enter a valid email address.', 'error');
         return;
       }
+      if (!phoneValid) {
+        showNote('Please enter a valid phone / WhatsApp number.', 'error');
+        form.phone?.focus();
+        return;
+      }
+      if (!termsAccepted) {
+        showNote('Please agree to the Terms & Conditions before submitting.', 'error');
+        form.terms?.focus();
+        return;
+      }
 
-      // No backend — open the visitor's mail client with a pre-filled draft
-      const subject = encodeURIComponent(
-        form.subject.value.trim() || 'Portfolio contact from ' + name
+      // Persist lead directly into localStorage for the Admin Portal
+      const newLead = {
+        id: 'lead_' + Date.now(),
+        timestamp: new Date().toISOString(),
+        name: name,
+        email: email,
+        phone: phone,
+        service: service,
+        subject: userSubject || `Inquiry for ${service}`,
+        message: message,
+        termsAccepted: true,
+        status: 'new'
+      };
+
+      try {
+        const storedLeads = localStorage.getItem('akhil_portfolio_leads');
+        const leads = storedLeads ? JSON.parse(storedLeads) : [];
+        leads.unshift(newLead);
+        localStorage.setItem('akhil_portfolio_leads', JSON.stringify(leads));
+      } catch (err) {
+        console.warn('Could not store lead to localStorage:', err);
+      }
+
+      // Open visitor's mail client with a structured pre-filled draft
+      const finalSubject = encodeURIComponent(
+        userSubject ? `${userSubject} [${service}]` : `Inquiry for ${service} — ${name}`
       );
-      const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
-      window.location.href =
-        'mailto:akhilannam81@gmail.com?subject=' + subject + '&body=' + body;
+      const finalBody = encodeURIComponent(
+        `Service / Project Type: ${service}\n\nClient Name: ${name}\nClient Email: ${email}\nClient Phone / WhatsApp: ${phone || 'N/A'}\n\nProject Scope & Message:\n${message}\n\nTerms Accepted: Yes\n\n— Sent via akhilannam.dev`
+      );
 
-      showNote('Opening your email client… Thank you for reaching out!', 'success');
+      showNote('Inquiry recorded successfully! Opening your email client to send direct copy…', 'success');
       form.reset();
+
+      setTimeout(() => {
+        window.location.href = `mailto:akhilannam81@gmail.com?subject=${finalSubject}&body=${finalBody}`;
+      }, 600);
     });
 
     function showNote(text, type) {
@@ -196,7 +243,88 @@
     }
   }
 
-  /* ---------- 8. SCROLL-TO-TOP + YEAR ---------- */
+  /* ---------- 8. TERMS & CONDITIONS MODAL CONTROLLER ---------- */
+  const termsModal = document.getElementById('terms-modal');
+  const openTermsBtn = document.getElementById('open-terms-btn');
+  const closeTermsBtn = document.getElementById('close-terms-btn');
+  const acceptTermsBtn = document.getElementById('accept-terms-btn');
+  const termsBackdrop = document.getElementById('terms-backdrop');
+  const termsCheckbox = document.getElementById('cf-terms');
+
+  function openTermsModal() {
+    if (!termsModal) return;
+    termsModal.classList.add('active');
+    termsModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeTermsModal() {
+    if (!termsModal) return;
+    termsModal.classList.remove('active');
+    termsModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (openTermsBtn) {
+    openTermsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openTermsModal();
+    });
+  }
+
+  if (closeTermsBtn) closeTermsBtn.addEventListener('click', closeTermsModal);
+  if (termsBackdrop) termsBackdrop.addEventListener('click', closeTermsModal);
+
+  if (acceptTermsBtn) {
+    acceptTermsBtn.addEventListener('click', () => {
+      if (termsCheckbox) {
+        termsCheckbox.checked = true;
+      }
+      closeTermsModal();
+      if (form) {
+        const currentNote = document.getElementById('form-note');
+        if (currentNote && currentNote.textContent.includes('Terms')) {
+          currentNote.textContent = '';
+          currentNote.className = 'form-note';
+        }
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && termsModal && termsModal.classList.contains('active')) {
+      closeTermsModal();
+    }
+  });
+
+  /* ---------- 9. INVISIBLE ADMIN SHORTCUTS ---------- */
+  // 1. Keyboard Shortcut: Ctrl + Shift + A or Alt + A
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) ||
+        (e.altKey && (e.key === 'A' || e.key === 'a'))) {
+      e.preventDefault();
+      window.location.href = 'admin.html';
+    }
+  });
+
+  // 2. Secret Triple Click on Footer Copy text
+  const footerCopy = document.querySelector('.footer-copy');
+  if (footerCopy) {
+    let clicks = 0;
+    let clickTimeout = null;
+    footerCopy.addEventListener('click', () => {
+      clicks++;
+      if (clicks === 3) {
+        window.location.href = 'admin.html';
+        clicks = 0;
+      }
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => { clicks = 0; }, 600);
+    });
+  }
+
+  /* ---------- 9. SCROLL-TO-TOP + YEAR ---------- */
   const scrollTopBtn = document.getElementById('scroll-top');
 
   window.addEventListener('scroll', () => {

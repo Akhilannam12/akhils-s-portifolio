@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Form Submissions &amp; Client Inquiries</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" type="image/png" href="assets/profile.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Space Grotesk', 'Inter', sans-serif;
+      --bg: #0a0e1a;
+      --bg-soft: #0f1526;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-hover: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text: #e8ecf4;
+      --text-soft: #9aa5b8;
+      --text-faint: #64708a;
+      --primary: #6366f1;
+      --primary-strong: #818cf8;
+      --accent: #22d3ee;
+      --gradient: linear-gradient(120deg, #818cf8 0%, #22d3ee 100%);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Background Orbs */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+    }
+
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      top: -120px;
+      right: -100px;
+      background: radial-gradient(circle, #6366f1, transparent 70%);
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -80px;
+      background: radial-gradient(circle, #22d3ee, transparent 70%);
+    }
+
+    /* Container */
+    .admin-container {
+      width: min(1200px, 94%);
+      margin-inline: auto;
+      padding-top: 36px;
+    }
+
+    /* Top Navbar */
+    .admin-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      margin-bottom: 34px;
+    }
+
+    .admin-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-badge {
+      font-size: 0.72rem;
+      font-family: monospace;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--glass-border);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+      color: #fff;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-danger:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      border-radius: 6px;
+    }
+
+    /* Auth Card (Modal style when locked) */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 26, 0.88);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: min(440px, 100%);
+      padding: 38px 32px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .auth-icon {
+      display: grid;
+      place-items: center;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--primary-strong);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .auth-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .auth-card p {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin-bottom: 26px;
+    }
+
+    .auth-input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .auth-input-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-soft);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--glass-border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-soft);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+
+    .auth-hint {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+
+    .auth-hint code {
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    .auth-error {
+      color: #f87171;
+      font-size: 0.84rem;
+      margin-top: 10px;
+      min-height: 1.3em;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      padding: 22px 20px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-lbl {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Filter & Search Bar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      min-width: 280px;
+      flex-grow: 1;
+      max-width: 440px;
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 100%;
+      outline: none;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .select-control {
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--glass-border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.88rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .select-control option {
+      background-color: var(--bg-soft);
+      color: var(--text);
+    }
+
+    /* Leads Table */
+    .table-container {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .leads-table th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 16px 20px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      border-bottom: 1px solid var(--glass-border);
+      font-weight: 600;
+    }
+
+    .leads-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--glass-border);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .leads-table tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    .leads-table tbody tr:hover {
+      background: var(--surface-hover);
+    }
+
+    /* Badges */
+    .lead-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-new { background: rgba(34, 211, 238, 0.15); color: #22d3ee; }
+    .badge-contacted { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+    .badge-in_progress { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+    .badge-closed { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+
+    .service-tag {
+      font-size: 0.78rem;
+      font-family: monospace;
+      color: var(--primary-strong);
+      background: rgba(99, 102, 241, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .client-info strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .client-info span {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .message-preview {
+      max-width: 320px;
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--glass-border);
+      background: var(--surface);
+      color: var(--text-soft);
+      transition: all 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .icon-wa:hover { background: #25d366; border-color: #25d366; }
+    .icon-em:hover { background: var(--primary); border-color: var(--primary); }
+    .icon-del:hover { background: #ef4444; border-color: #ef4444; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-soft);
+    }
+
+    .empty-state svg {
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+
+    /* Modal for View Details */
+    .detail-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      padding: 20px;
+    }
+
+    .detail-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(600px, 100%);
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--surface);
+      font-size: 1.2rem;
+    }
+
+    .modal-body .field {
+      margin-bottom: 16px;
+    }
+
+    .modal-body .field-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+    }
+
+    .modal-body .field-val {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .modal-message-box {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .leads-table {
+        display: block;
+        overflow-x: auto;
+      }
+      .admin-navbar {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Authentication Overlay -->
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-card glass">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2>Admin Login</h2>
+      <p>Authorized access only to view client submissions and leads.</p>
+
+      <form id="auth-form">
+        <div class="auth-input-group">
+          <label for="admin-pass">Access Passcode</label>
+          <input type="password" id="admin-pass" class="form-control" placeholder="Enter admin passcode" required autofocus>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+          Unlock Dashboard
+        </button>
+        <p class="auth-error" id="auth-error"></p>
+        <p class="auth-hint">
+          Default passcode: <code>akhil@admin</code> or <code>admin123</code>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Container -->
+  <div class="admin-container">
+    <!-- Navbar -->
+    <header class="admin-navbar glass">
+      <div class="admin-logo">
+        <span style="color: var(--accent);">&lt;</span>akhil<span style="color: var(--accent);">/&gt;</span>
+        <span>Admin Portal</span>
+        <span class="admin-badge">PRIVATE</span>
+      </div>
+
+      <div class="admin-nav-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Portfolio
+        </a>
+        <button id="logout-btn" class="btn btn-danger btn-sm">
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          Lock / Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Cards -->
+    <section class="stats-grid">
+      <div class="stat-card glass">
+        <div class="stat-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="total-count">0</div>
+          <div class="stat-lbl">Total Inquiries</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon" style="background: rgba(34, 211, 238, 0.15); color: #22d3ee;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 14 14"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="new-count" style="color: #22d3ee;">0</div>
+          <div class="stat-lbl">New Leads</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="saas-count">0</div>
+          <div class="stat-lbl">SaaS / CRM Leads</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="closed-count" style="color: #34d399;">0</div>
+          <div class="stat-lbl">Converted / Closed</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls / Toolbar -->
+    <div class="toolbar glass">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+          stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-faint);">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search by client name, email, or message...">
+      </div>
+
+      <div class="filter-group">
+        <select id="service-filter" class="select-control">
+          <option value="all">All Services</option>
+          <option value="Custom SaaS Application / CRM">SaaS / CRM</option>
+          <option value="All Types of Custom Websites">Custom Websites</option>
+          <option value="Mobile App (iOS & Android)">Mobile Apps</option>
+          <option value="Backend Architecture & APIs">Backend &amp; APIs</option>
+          <option value="Full-Time / Contract Role">Full-Time / Contract</option>
+          <option value="General Consultation">General Consultation</option>
+        </select>
+
+        <select id="status-filter" class="select-control">
+          <option value="all">All Statuses</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="in_progress">In Progress</option>
+          <option value="closed">Closed</option>
+        </select>
+
+        <button id="export-csv-btn" class="btn btn-outline btn-sm" title="Export as CSV spreadsheet">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Export CSV
+        </button>
+
+        <button id="add-sample-btn" class="btn btn-outline btn-sm" title="Generate sample test leads">
+          + Add Sample Lead
+        </button>
+      </div>
+    </div>
+
+    <!-- Leads Table -->
+    <div class="table-container glass">
+      <table class="leads-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Client Info</th>
+            <th>Service</th>
+            <th>Subject &amp; Message</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3>No Form Submissions Found</h3>
+        <p>Inquiries submitted on the portfolio contact form will appear here in real-time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="detail-modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3 id="modal-title">Inquiry Details</h3>
+        <button id="modal-close" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Injected details -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'akhil_portfolio_leads';
+      const AUTH_KEY = 'akhil_admin_authenticated';
+      const VALID_PASSWORDS = ['akhil@admin', 'admin123', 'akhil2026', 'admin@akhil'];
+
+      const authOverlay = document.getElementById('auth-overlay');
+      const authForm = document.getElementById('auth-form');
+      const adminPass = document.getElementById('admin-pass');
+      const authError = document.getElementById('auth-error');
+      const logoutBtn = document.getElementById('logout-btn');
+
+      const tbody = document.getElementById('leads-tbody');
+      const emptyState = document.getElementById('empty-state');
+      const searchInput = document.getElementById('search-input');
+      const serviceFilter = document.getElementById('service-filter');
+      const statusFilter = document.getElementById('status-filter');
+      const exportCsvBtn = document.getElementById('export-csv-btn');
+      const addSampleBtn = document.getElementById('add-sample-btn');
+
+      const totalCount = document.getElementById('total-count');
+      const newCount = document.getElementById('new-count');
+      const saasCount = document.getElementById('saas-count');
+      const closedCount = document.getElementById('closed-count');
+
+      const detailModal = document.getElementById('detail-modal');
+      const modalClose = document.getElementById('modal-close');
+      const modalBody = document.getElementById('modal-body');
+
+      /* Sample data seeds if first-time user */
+      function initSampleLeadsIfEmpty() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored || JSON.parse(stored).length === 0) {
+          const sample = [
+            {
+              id: 'lead_1',
+              timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
+              name: 'Vikram Malhotra',
+              email: 'vikram.tech@malhotracorp.com',
+              phone: '+91 98450 12345',
+              service: 'Custom SaaS Application / CRM',
+              subject: 'Need Custom Sales CRM for Real Estate Business',
+              message: 'Hi Akhil, We are looking to develop a custom multi-tenant CRM for our real estate sales team with automated lead assignment, WhatsApp notifications, and role-based access. Would love to discuss scope and pricing.',
+              status: 'new'
+            },
+            {
+              id: 'lead_2',
+              timestamp: new Date(Date.now() - 3600000 * 18).toISOString(),
+              name: 'Sarah Jenkins',
+              email: 'sarah@ecobloomorganics.io',
+              phone: '+1 (415) 890-2341',
+              service: 'All Types of Custom Websites',
+              subject: 'E-commerce Redesign & SEO Portal',
+              message: 'Hey Akhil, saw your portfolio. We need a high-converting, mobile-responsive custom website for our organic cosmetics brand with quick checkout and 95+ PageSpeed scores.',
+              status: 'contacted'
+            },
+            {
+              id: 'lead_3',
+              timestamp: new Date(Date.now() - 3600000 * 48).toISOString(),
+              name: 'Rajesh Sharma',
+              email: 'rajesh.sharma@quickfleet.in',
+              phone: '+91 97112 34567',
+              service: 'Mobile App (iOS & Android)',
+              subject: 'Driver & Delivery Cross-Platform App in Flutter',
+              message: 'We require a cross-platform mobile app for our delivery fleet with live GPS route tracking, offline storage, and push notifications. Timeline is around 6-8 weeks.',
+              status: 'in_progress'
+            }
+          ];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+        }
+      }
+
+      /* Check authentication */
+      function checkAuth() {
+        const isAuthenticated = sessionStorage.getItem(AUTH_KEY) === 'true';
+        if (isAuthenticated) {
+          authOverlay.style.display = 'none';
+          initSampleLeadsIfEmpty();
+          renderLeads();
+        } else {
+          authOverlay.style.display = 'flex';
+          adminPass.value = '';
+          adminPass.focus();
+        }
+      }
+
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const entered = adminPass.value.trim();
+        if (VALID_PASSWORDS.includes(entered)) {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          authError.textContent = '';
+          authOverlay.style.display = 'none';
+          initSampleLeadsIfEmpty();
+          renderLeads();
+        } else {
+          authError.textContent = 'Incorrect passcode. Please try again.';
+          adminPass.focus();
+        }
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem(AUTH_KEY);
+        checkAuth();
+      });
+
+      /* Load leads from storage */
+      function getLeads() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch {
+          return [];
+        }
+      }
+
+      function saveLeads(leads) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+        renderLeads();
+      }
+
+      /* Render Table & Metrics */
+      function renderLeads() {
+        const allLeads = getLeads();
+
+        // Update metrics
+        totalCount.textContent = allLeads.length;
+        newCount.textContent = allLeads.filter(l => l.status === 'new').length;
+        saasCount.textContent = allLeads.filter(l => (l.service || '').toLowerCase().includes('saas') || (l.service || '').toLowerCase().includes('crm')).length;
+        closedCount.textContent = allLeads.filter(l => l.status === 'closed').length;
+
+        // Apply filters
+        const q = searchInput.value.trim().toLowerCase();
+        const sf = serviceFilter.value;
+        const stf = statusFilter.value;
+
+        const filtered = allLeads.filter(lead => {
+          const matchQuery = !q ||
+            (lead.name && lead.name.toLowerCase().includes(q)) ||
+            (lead.email && lead.email.toLowerCase().includes(q)) ||
+            (lead.subject && lead.subject.toLowerCase().includes(q)) ||
+            (lead.message && lead.message.toLowerCase().includes(q));
+
+          const matchService = sf === 'all' || lead.service === sf;
+          const matchStatus = stf === 'all' || lead.status === stf;
+
+          return matchQuery && matchService && matchStatus;
+        });
+
+        tbody.innerHTML = '';
+
+        if (filtered.length === 0) {
+          emptyState.style.display = 'block';
+          return;
+        }
+        emptyState.style.display = 'none';
+
+        filtered.forEach(lead => {
+          const tr = document.createElement('tr');
+
+          const dateObj = new Date(lead.timestamp);
+          const dateFormatted = isNaN(dateObj.getTime())
+            ? 'Recent'
+            : dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+          const statusClasses = {
+            'new': 'badge-new',
+            'contacted': 'badge-contacted',
+            'in_progress': 'badge-in_progress',
+            'closed': 'badge-closed'
+          };
+
+          const statusLabels = {
+            'new': '● New Lead',
+            'contacted': '● Contacted',
+            'in_progress': '● In Progress',
+            'closed': '✓ Closed'
+          };
+
+          const cleanPhone = (lead.phone || '').replace(/[^\d]/g, '');
+          const waUrl = cleanPhone
+            ? `https://wa.me/${cleanPhone}?text=Hi%20${encodeURIComponent(lead.name || 'there')},%20this%20is%20Akhil%20following%20up%20on%20your%20${encodeURIComponent(lead.service || 'software')}%20inquiry!`
+            : `https://wa.me/?text=Hi%20${encodeURIComponent(lead.name || 'there')},%20this%20is%20Akhil%20following%20up%20on%20your%20${encodeURIComponent(lead.service || 'software')}%20inquiry!`;
+
+          tr.innerHTML = `
+            <td style="color: var(--text-faint); font-size: 0.82rem; white-space: nowrap;">
+              ${dateFormatted}
+            </td>
+            <td>
+              <div class="client-info">
+                <strong>${escapeHtml(lead.name || 'Anonymous')}</strong>
+                <span>${escapeHtml(lead.email || 'No email')}</span>
+                ${lead.phone ? `<span style="color: var(--accent); font-size: 0.78rem; display: flex; align-items: center; gap: 4px; margin-top: 2px;">📞 <a href="tel:${escapeHtml(lead.phone)}" style="color: inherit;">${escapeHtml(lead.phone)}</a></span>` : ''}
+              </div>
+            </td>
+            <td>
+              <span class="service-tag">${escapeHtml(lead.service || 'General')}</span>
+            </td>
+            <td>
+              <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 2px;">
+                ${escapeHtml(lead.subject || 'Project Inquiry')}
+              </div>
+              <div class="message-preview" title="${escapeHtml(lead.message || '')}">
+                ${escapeHtml(lead.message || 'No description')}
+              </div>
+            </td>
+            <td>
+              <select class="select-control status-select" data-id="${lead.id}" style="font-size: 0.78rem; padding: 4px 8px;">
+                <option value="new" ${lead.status === 'new' ? 'selected' : ''}>New</option>
+                <option value="contacted" ${lead.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+                <option value="in_progress" ${lead.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
+                <option value="closed" ${lead.status === 'closed' ? 'selected' : ''}>Closed</option>
+              </select>
+            </td>
+            <td>
+              <div class="action-group">
+                <button class="icon-btn icon-view" data-id="${lead.id}" title="View Details">
+                  <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+                <a href="mailto:${encodeURIComponent(lead.email)}?subject=Re:%20${encodeURIComponent(lead.subject || 'Project Inquiry')}&body=Hi%20${encodeURIComponent(lead.name)},%0A%0AThank%20you%20for%20reaching%20out%20regarding%20your%20project.%0A%0ABest%20regards,%0AAnnam%20Akhil"
+                   class="icon-btn icon-em" title="Reply via Email">
+                  <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </a>
+                <a href="${waUrl}"
+                   target="_blank" rel="noopener noreferrer" class="icon-btn icon-wa" title="Reply on WhatsApp">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.09-1.1l-.29-.17-3.05.8 1.03-2.97-.19-.3A8.2 8.2 0 0 1 3.8 11.91c0-4.54 3.7-8.24 8.25-8.24m4.52 11.59c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.12-.22-.19-.47-.32"/>
+                  </svg>
+                </a>
+                <button class="icon-btn icon-del" data-id="${lead.id}" title="Delete Inquiry">
+                  <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+
+        // Bind status changes
+        document.querySelectorAll('.status-select').forEach(sel => {
+          sel.addEventListener('change', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const newSt = e.target.value;
+            const updated = getLeads().map(l => l.id === id ? { ...l, status: newSt } : l);
+            saveLeads(updated);
+          });
+        });
+
+        // Bind delete
+        document.querySelectorAll('.icon-del').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this inquiry?')) {
+              const updated = getLeads().filter(l => l.id !== id);
+              saveLeads(updated);
+            }
+          });
+        });
+
+        // Bind view details
+        document.querySelectorAll('.icon-view').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            const lead = getLeads().find(l => l.id === id);
+            if (lead) showLeadModal(lead);
+          });
+        });
+      }
+
+      function showLeadModal(lead) {
+        modalBody.innerHTML = `
+          <div class="field">
+            <div class="field-label">Date & Time</div>
+            <div class="field-val">${new Date(lead.timestamp).toLocaleString()}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Client Name</div>
+            <div class="field-val"><strong>${escapeHtml(lead.name)}</strong></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email Address</div>
+            <div class="field-val"><a href="mailto:${escapeHtml(lead.email)}" style="color: var(--accent);">${escapeHtml(lead.email)}</a></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Phone / WhatsApp Number</div>
+            <div class="field-val">
+              ${lead.phone ? `
+                <a href="tel:${escapeHtml(lead.phone)}" style="color: var(--accent); font-weight: 600;">${escapeHtml(lead.phone)}</a>
+                <a href="https://wa.me/${encodeURIComponent(lead.phone.replace(/[^\d]/g, ''))}?text=Hi%20${encodeURIComponent(lead.name || 'there')},%20this%20is%20Akhil%20following%20up%20on%20your%20inquiry!"
+                   target="_blank" rel="noopener noreferrer" style="margin-left: 10px; font-size: 0.76rem; background: rgba(37, 211, 102, 0.15); color: #25d366; border: 1px solid rgba(37, 211, 102, 0.3); padding: 3px 9px; border-radius: 99px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                   💬 Chat on WhatsApp
+                </a>
+              ` : '<span style="color: var(--text-faint);">Not provided</span>'}
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Service Inquired</div>
+            <div class="field-val"><span class="service-tag">${escapeHtml(lead.service)}</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Subject</div>
+            <div class="field-val"><strong>${escapeHtml(lead.subject)}</strong></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Terms &amp; Conditions</div>
+            <div class="field-val"><span style="color: #34d399; font-weight: 600; font-size: 0.88rem;">✓ Agreed (Confidentiality &amp; Direct Contact Consent)</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Detailed Project Scope</div>
+            <div class="modal-message-box">${escapeHtml(lead.message)}</div>
+          </div>
+        `;
+        detailModal.classList.add('active');
+      }
+
+      modalClose.addEventListener('click', () => {
+        detailModal.classList.remove('active');
+      });
+
+      detailModal.addEventListener('click', (e) => {
+        if (e.target === detailModal) detailModal.classList.remove('active');
+      });
+
+      /* Search & filter event listeners */
+      searchInput.addEventListener('input', renderLeads);
+      serviceFilter.addEventListener('change', renderLeads);
+      statusFilter.addEventListener('change', renderLeads);
+
+      /* Export CSV */
+      exportCsvBtn.addEventListener('click', () => {
+        const leads = getLeads();
+        if (leads.length === 0) {
+          alert('No leads available to export.');
+          return;
+        }
+
+        const headers = ['Date', 'Name', 'Email', 'Phone', 'Service', 'Subject', 'Status', 'Message'];
+        const rows = leads.map(l => [
+          `"${new Date(l.timestamp).toLocaleString().replace(/"/g, '""')}"`,
+          `"${(l.name || '').replace(/"/g, '""')}"`,
+          `"${(l.email || '').replace(/"/g, '""')}"`,
+          `"${(l.phone || '').replace(/"/g, '""')}"`,
+          `"${(l.service || '').replace(/"/g, '""')}"`,
+          `"${(l.subject || '').replace(/"/g, '""')}"`,
+          `"${(l.status || '').replace(/"/g, '""')}"`,
+          `"${(l.message || '').replace(/"/g, '""')}"`
+        ]);
+
+        const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `leads_export_${new Date().toISOString().slice(0, 10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+
+      /* Add sample lead */
+      addSampleBtn.addEventListener('click', () => {
+        const services = [
+          'Custom SaaS Application / CRM',
+          'All Types of Custom Websites',
+          'Mobile App (iOS & Android)',
+          'Backend Architecture & APIs'
+        ];
+        const randomService = services[Math.floor(Math.random() * services.length)];
+        const sampleNames = ['Rohan Verma', 'Ananya Gupta', 'Michael Roberts', 'Priya Nambiar'];
+        const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+
+        const newLead = {
+          id: 'lead_' + Date.now(),
+          timestamp: new Date().toISOString(),
+          name: randomName,
+          email: `${randomName.toLowerCase().replace(' ', '.')}@example.com`,
+          phone: '+91 98' + Math.floor(10000000 + Math.random() * 90000000),
+          service: randomService,
+          subject: `Inquiry for ${randomService}`,
+          message: `Hello Akhil, I would like to get a quote and timeline estimate for developing a ${randomService}. We have designs and wireframes ready.`,
+          status: 'new'
+        };
+
+        const existing = getLeads();
+        existing.unshift(newLead);
+        saveLeads(existing);
+      });
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Initial check on page load
+      checkAuth();
+    })();
+  </script>
+</body>
+
+</html>
